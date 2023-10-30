@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { title, price, stock, description } = req.body;
+  const { title, price, stock, description, category, code } = req.body;
 
   if (!title || !price || !stock || !description || !category | !code) {
     return res.status(400).json({ message: "some data is missing" });
