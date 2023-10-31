@@ -16,6 +16,7 @@ class CartsManager {
   async addProductToCart(idCart, idProduct) {
     const cart = await cartsModel.findById(idCart);
 
+    // buscamos el producto por indice si existe
     const productIndex = cart.products.findIndex((prod) =>
       prod.product.equals(idProduct)
     );

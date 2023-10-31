@@ -8,6 +8,8 @@ import viewsRouter from "./routes/views.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import chatRouter from "./routes/chat.router.js";
 
+import { messageManager } from "./managers/messagesManager.js";
+
 //db
 import "./db/configDB.js";
 
@@ -34,18 +36,31 @@ const httpServer = app.listen(8080, () =>
 );
 
 const socketServer = new Server(httpServer);
-const messages = [];
 
-socketServer.on("connection", (socket) => {
+const users = [];
+
+socketServer.on("connection", async (socket) => {
   console.log("cliente conectado: ", socket.id);
+  await messageManager.getAll();
 
-  socket.on("newUser", (user) =>
-    //emitir el evento a todos menos al usuario que se conecta
-    socket.broadcast.emit("userConnected", user)
-  );
-
-  socket.on("message", (info) => {
-    messages.push(info);
+  socket.on("message", async (info) => {
+    console.log(info);
+    await messageManager.createOne(info.user, info.email, info.message);
+    const messages = await messageManager.getAll();
+    console.log(messages);
     socketServer.emit("chat", messages);
+  });
+
+  socket.on("userConnected", (user) => {
+    users.push(user);
+    socket.broadcast.emit("users", users);
+  });
+
+  socket.on("disconnect", () => {
+    const disconnectedUser = users.find((u) => u.socketId === socket.id);
+    if (disconnectedUser) {
+      users.splice(users.indexOf(disconnectedUser), 1);
+      socket.broadcast.emit("userDisconnected", disconnectedUser);
+    }
   });
 });

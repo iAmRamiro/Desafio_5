@@ -1,16 +1,66 @@
-<h2>Chat</h2>
-<h3 id="name"></h3>
+<nav class="navbar navbar-light bg-primary">
+  <h1 class="navbar-brand mx-auto fs-1">Chat </h1>
+</nav>
 
-<form id="chatForm">
+<div class="container text-center">
 
-  <div>
-    <label for="message">Message</label>
-    <input type="text" name="message" id="message" />
-    <input type="submit" value="Send" />
+  <h3 id="name"></h3>
+
+  <form id="signin">
+
+    <h4 class="mt-4 mb-4">Sing In</h4>
+
+    <div>
+      <label for="user">UserName</label>
+      <input type="text" name="user" id="user" required />
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required />
+    </div>
+
+    <div>
+      <input type="submit" value="Ingresar" class="btn btn-primary mt-2" />
+    </div>
+
+  </form>
+
+  <form action="" id="chatForm" style="display:none;">
+
+    <div>
+      <label for="message">Message</label>
+      <input type="text" name="message" id="message" />
+      <input
+        type="submit"
+        value="Send"
+        id="sendButton"
+        class="btn btn-primary mt-2"
+      />
+    </div>
+
+  </form>
+
+  <div id="chat">
+
   </div>
-</form>
 
-<div id="chat">
+</div>
+
+<div id="currentUsers" style="display: none;" class="container">
+  <div class="row">
+
+    <div class="col-md-6 offset-md-1 mt-4">
+      <div class="card col-md-3">
+        <div class="card-header">
+          <h3>Users</h3>
+        </div>
+        <div class="card-body">
+          <div id="usernames"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
