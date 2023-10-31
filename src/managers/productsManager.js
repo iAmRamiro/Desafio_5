@@ -21,8 +21,8 @@ class ProductsManager {
     return resolve;
   }
 
-  async delteOne(id) {
-    const resolve = await productsModel.deleteOne(id);
+  async deleteOne(id) {
+    const resolve = await productsModel.deleteOne({ _id: id });
     return resolve;
   }
 }

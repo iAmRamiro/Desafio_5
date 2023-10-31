@@ -21,9 +21,25 @@ const productSchema = new mongoose.Schema({
     default: 0,
   },
 
+  category: {
+    type: String,
+    required: true,
+  },
+
+  code: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
   thumbnails: {
     type: Array,
     default: [],
+  },
+
+  status: {
+    type: Boolean,
+    default: true,
   },
 });
 

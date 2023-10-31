@@ -3,10 +3,10 @@ import { cartsManager } from "../managers/cartManager.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/:idCart", async (req, res) => {
   const { idCart } = req.params;
 
-  const cart = cartsManager.findCartById(idCart);
+  const cart = await cartsManager.findCartById(idCart);
 
   res.json({ cart });
 });
