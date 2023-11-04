@@ -29,9 +29,11 @@ router.delete("/:idCart", async (req, res) => {
   const { idCart } = req.params;
 
   try {
-    const cartDeleted = await cartsManager.deleteCart(idCart);
+    const productsDeleted = await cartsManager.deleteAllProducts(idCart);
 
-    res.status(200).json({ message: "cart deleted", cartDeleted });
+    res
+      .status(200)
+      .json({ message: "all products deleted", cart: productsDeleted });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -63,6 +65,17 @@ router.put("/:idCart/products/:idProduct", async (req, res) => {
       quantity
     );
     res.status(200).json({ message: "quantity updated", response });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put("/:idCart", async (req, res) => {
+  const { idCart } = req.params;
+
+  try {
+    const updatedCart = await cartsManager.updateCart(idCart, req.body);
+    res.status(200).json({ message: "cart updated", updatedCart });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

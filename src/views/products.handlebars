@@ -1,7 +1,22 @@
-<h1>Products</h1>
+<h1 class="text-center pb-4 pt-4" >Product Lists</h1>
 
-{{#each products}}
-
-  <p>{{this}}</p>
-
-{{/each}}
+<div class="container-lg text-center">
+  <div class="row">
+    {{#each products}}
+      <div class="col-md-3">
+        <div class="card mb-4" style="width: 18rem;">
+          <img
+            src="{{thumbnails.[0]}}"
+            class="card-img-top"
+            alt="Product Thumbnail"
+          />
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{title}}</h5>
+            <p class="card-text  text-truncate">{{description}}</p>
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

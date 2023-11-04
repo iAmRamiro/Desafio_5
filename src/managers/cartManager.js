@@ -32,15 +32,22 @@ class CartsManager {
     return cart.save();
   }
 
-  async deleteCart(idCart) {
+  async deleteAllProducts(idCart) {
     try {
-      const cartDeleted = await cartsModel
-        .findByIdAndDelete({ _id: idCart })
-        .populate("products.product", "title");
+      const updatedCart = await cartsModel.findByIdAndUpdate(
+        idCart,
+        { $set: { products: [] } },
+        { new: true }
+      );
 
-      return cartDeleted;
+      if (!updatedCart) {
+        throw new Error("Cart not found");
+      }
+
+      return { deleted: true, updatedCart };
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
+      return { deleted: false, error: error.message };
     }
   }
 
@@ -60,6 +67,22 @@ class CartsManager {
     } catch (error) {
       console.error(error);
       return { deleted: false, error: error.message };
+    }
+  }
+
+  async updateCart(idCart, newProducts) {
+    try {
+      const cart = await cartsModel.findById(idCart);
+
+      if (!cart) {
+        throw new Error("Cart Not Found");
+      }
+
+      cart.products = newProducts.products;
+
+      return cart.save();
+    } catch (error) {
+      console.error(error);
     }
   }
 
