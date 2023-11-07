@@ -8,10 +8,13 @@ router.get("/home", (req, res) => {
 });
 
 router.get("/products", async (req, res) => {
-  const products = await productsManager.findProducts();
-  /* console.log("productos", products); */
+  let products = await productsManager.findAll(req.query);
 
-  res.render("products", { products });
+  const { payload: ProductsDB, ...rest } = products;
+
+  const productObject = ProductsDB.map((p) => p.toObject());
+
+  res.render("products", { products: productObject, paging: rest });
 });
 
 export default router;

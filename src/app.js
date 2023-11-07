@@ -34,7 +34,7 @@ app.set("view engine", "handlebars");
 app.use("/static", express.static("public"));
 
 app.use("/api/products", productsRouter);
-app.use("/views", viewsRouter);
+app.use("/api/views", viewsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/views/chat", chatRouter);
 

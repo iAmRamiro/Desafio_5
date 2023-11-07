@@ -1,22 +1,46 @@
-<h1 class="text-center pb-4 pt-4" >Product Lists</h1>
 
-<div class="container-lg text-center">
-  <div class="row">
-    {{#each products}}
-      <div class="col-md-3">
-        <div class="card mb-4" style="width: 18rem;">
-          <img
-            src="{{thumbnails.[0]}}"
-            class="card-img-top"
-            alt="Product Thumbnail"
-          />
-          <div class="card-body">
-            <h5 class="card-title text-truncate">{{title}}</h5>
-            <p class="card-text  text-truncate">{{description}}</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
+
+<div class="wrapper" id="bg">
+
+  <div class="container-lg text-center">
+    <h1 class="text-center pb-4 pt-4" >Product Lists</h1>
+    <div class="row ">
+      {{#each products}}
+        <div class="col-md-3">
+          <div class="card mb-4" style="width: 18rem;">
+            <div class="img">
+
+              <img
+                src="{{thumbnails.[0]}}"
+                class="card-img-top"
+                alt="Product Thumbnail"
+              
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-truncate">{{title}}</h5>
+              <p class="card-text  text-truncate">{{description}}</p>
+              <button onclick="showCart()" class="btn btn-primary"> <i class="bi bi-cart-plus"></i> Buy</button>
+              <button class="btn btn-primary"> <i class="bi bi-eye-fill"></i> show</button>
+            </div>
           </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
   </div>
+
+  <div class="sideCart disabled" id="sideCart">
+    <div class="cartBar">
+      <h2 >Cart</h2>
+   
+        <i class="bi bi-x-circle" onclick="hideCart()"></i>
+      
+    </div>
+      <div class="products">
+
+      </div>
+  </div>
+
 </div>
+
+

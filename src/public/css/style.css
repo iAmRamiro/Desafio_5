@@ -1,0 +1,62 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.img {
+  cursor: pointer;
+  transition: scale 1s;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.sideCart {
+  position: absolute;
+  width: 30%;
+  height: 100vh;
+  background-color: gray;
+  right: 0;
+  top: 0;
+  border-top-left-radius: 20px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%); /* Inicialmente oculto */
+  transition: transform 0.3s ease-in-out; /* Propiedad de transición */
+}
+
+.sideCart.active {
+  transform: translateX(0); /* Mostrar el carrito */
+}
+
+.sideCart.hiding {
+  transform: translateX(100%);
+}
+
+.sideCart h2 {
+  color: #fff;
+  width: 100%;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.cartBar {
+  border-top-left-radius: 20px;
+  background: #222;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 1rem;
+}
+
+.cartBar i {
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.disabled {
+  display: none;
+}
